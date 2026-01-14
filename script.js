@@ -199,10 +199,28 @@ class SpeedReader {
     }
 
     parseWords(text) {
-        return text
-            .split(/\s+/)
-            .filter(word => word.length > 0)
-            .map(word => word.replace(/[^a-zA-Z0-9åäöÅÄÖ]/g, ''));
+        // Dela först på stycken (två eller fler radbrytningar)
+        const paragraphs = text.split(/\n\n+|(\r\n\r\n)+/);
+        
+        const wordObjects = [];
+        
+        paragraphs.forEach((paragraph, paraIndex) => {
+            if (!paragraph || paragraph.trim().length === 0) return;
+            
+            // Dela stycke på ord
+            const words = paragraph
+                .trim()
+                .split(/\s+/)
+                .filter(word => word.length > 0)
+                .map((word, wordIndex) => ({
+                    text: word.replace(/[^a-zA-Z0-9åäöÅÄÖ]/g, ''),
+                    isNewParagraph: wordIndex === 0 && paraIndex > 0
+                }));
+            
+            wordObjects.push(...words);
+        });
+        
+        return wordObjects;
     }
 
     highlightMiddleLetter(word) {
@@ -219,7 +237,9 @@ class SpeedReader {
     displayWord() {
         if (this.words.length === 0) return;
 
-        const word = this.words[this.currentIndex];
+        const wordObj = this.words[this.currentIndex];
+        const word = typeof wordObj === 'string' ? wordObj : wordObj.text;
+        
         this.wordDisplay.innerHTML = this.highlightMiddleLetter(word);
         this.updateProgress();
     }
@@ -238,8 +258,9 @@ class SpeedReader {
         this.pauseBtn.disabled = false;
 
         const msPerWord = 60000 / this.speed;
+        let nextTimeout;
 
-        this.interval = setInterval(() => {
+        const playNext = () => {
             this.currentIndex++;
 
             if (this.currentIndex >= this.words.length) {
@@ -250,7 +271,21 @@ class SpeedReader {
             }
 
             this.displayWord();
-        }, msPerWord);
+
+            // Kontrollera om nästa ord är början på ett nytt stycke
+            const nextWord = this.words[this.currentIndex];
+            const isNewParagraph = typeof nextWord === 'object' && nextWord.isNewParagraph;
+            
+            // Paus är normal tid för ord, men dubbel för styckebrytning
+            const delayTime = isNewParagraph ? msPerWord * 3 : msPerWord;
+
+            nextTimeout = setTimeout(playNext, delayTime);
+        };
+
+        nextTimeout = setTimeout(playNext, msPerWord);
+        
+        // Lagra timeout-ID så vi kan rensa det vid pause
+        this.currentTimeout = nextTimeout;
     }
 
     pause() {
@@ -261,6 +296,11 @@ class SpeedReader {
         if (this.interval) {
             clearInterval(this.interval);
             this.interval = null;
+        }
+        
+        if (this.currentTimeout) {
+            clearTimeout(this.currentTimeout);
+            this.currentTimeout = null;
         }
     }
 
