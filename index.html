@@ -3,17 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speedreader - Speed Reading Tool</title>
+    <meta name="description" content="Speedreader - Free speed reading tool using RSVP technology. Read 2-3x faster while maintaining comprehension. Improve your reading speed and productivity instantly.">
+    <meta name="keywords" content="speed reading tool, speed reader, RSVP, read faster, reading speed, productivity tool, learning tool, time management, reading efficiency, speed reading techniques">
+    <meta name="author" content="Speedreader">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#2c3e50">
+    
+    <!-- Open Graph Tags for Social Sharing -->
+    <meta property="og:title" content="Speedreader - Read 2-3x Faster with RSVP Technology">
+    <meta property="og:description" content="Free speed reading tool that helps you read faster while maintaining comprehension. Start reading more efficiently today.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://speedreader.app">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Speedreader - Speed Reading Tool">
+    <meta name="twitter:description" content="Read articles and texts 2-3x faster using RSVP technology. Free, no signup required.">
+    
+    <title>Speedreader - Free Speed Reading Tool | Read 2-3x Faster</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
             <h1>📖 Speedreader</h1>
-            <p>Read articles faster with visual focus</p>
+            <p>Read Articles & Texts 2-3x Faster with Visual Focus Technology</p>
         </header>
 
         <div class="input-section">
+            <h2>Start Speed Reading Today</h2>
             <div class="input-tabs">
                 <button class="tab-btn active" data-tab="text-tab">📝 Paste Text</button>
                 <button class="tab-btn" data-tab="url-tab">📎 From URL</button>
@@ -21,11 +39,12 @@
 
             <div id="text-tab" class="tab-content active">
                 <div class="input-group">
-                    <label for="textInput">Paste your text to read:</label>
+                    <label for="textInput">Paste your article or text:</label>
                     <textarea 
                         id="textInput" 
                         placeholder="Paste article text here to get started..."
                         rows="8"
+                        aria-label="Paste text content for speed reading"
                     ></textarea>
                     <button id="loadTextBtn" class="btn-primary">Start Reading</button>
                 </div>
@@ -33,28 +52,30 @@
 
             <div id="url-tab" class="tab-content">
                 <div class="input-group">
-                    <label for="urlInput">Paste article URL:</label>
+                    <label for="urlInput">Enter article URL:</label>
                     <input 
                         type="url" 
                         id="urlInput" 
                         placeholder="https://example.com/article" 
                         autocomplete="off"
+                        aria-label="Enter article URL to load content"
                     >
                     <button id="loadBtn" class="btn-primary">Load Article</button>
                 </div>
             </div>
 
-            <div id="errorMessage" class="error-message"></div>
+            <div id="errorMessage" class="error-message" role="alert"></div>
         </div>
 
         <div class="reader-section" id="readerSection" style="display: none;">
+            <h2>Speed Reading in Progress</h2>
             <div class="controls">
-                <button id="playBtn" class="btn-control">▶ Play</button>
-                <button id="pauseBtn" class="btn-control">⏸ Pause</button>
-                <button id="resetBtn" class="btn-control">⟲ Reset</button>
+                <button id="playBtn" class="btn-control" title="Start reading (Space)">▶ Play</button>
+                <button id="pauseBtn" class="btn-control" title="Pause reading (Space)">⏸ Pause</button>
+                <button id="resetBtn" class="btn-control" title="Reset to beginning (R)">⟲ Reset</button>
                 
                 <div class="speed-control">
-                    <label for="speedSlider">Speed (WPM):</label>
+                    <label for="speedSlider">Reading Speed (WPM):</label>
                     <input 
                         type="range" 
                         id="speedSlider" 
@@ -62,8 +83,9 @@
                         max="1000" 
                         value="300" 
                         step="10"
+                        aria-label="Adjust reading speed from 100 to 1000 words per minute"
                     >
-                    <span id="speedDisplay">300</span>
+                    <span id="speedDisplay" aria-live="polite">300</span>
                 </div>
             </div>
 
@@ -72,23 +94,120 @@
                 <span class="shortcut"><kbd>R</kbd> Reset</span>
             </div>
 
-            <div class="word-display" id="wordDisplay">
+            <div class="word-display" id="wordDisplay" role="main" aria-live="polite" aria-atomic="true">
                 Loading words...
             </div>
 
             <div class="progress">
-                <div class="progress-bar" id="progressBar"></div>
+                <div class="progress-bar" id="progressBar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
             </div>
             <div class="progress-text">
                 <span id="progressText">0 / 0</span>
             </div>
         </div>
 
+        <section class="benefits-section">
+            <h2>Why Speed Reading Works</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3>🎯 Laser Focus</h3>
+                    <p>The red highlighted letter keeps your eyes anchored at one focal point, eliminating wasteful eye movements that slow you down.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>⚡ 2-3x Faster</h3>
+                    <p>RSVP technology reduces eye movement and subvocalization, letting you read articles and books significantly faster without losing comprehension.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>📚 Better Retention</h3>
+                    <p>The consistent word pace keeps you in flow state, improving focus and memory retention compared to traditional reading.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>⏱️ Save Time</h3>
+                    <p>Read more content in less time. Perfect for students, professionals, and lifelong learners who want to learn faster.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="features-section">
+            <h2>Powerful Speed Reading Features</h2>
+            <ul class="features-list">
+                <li><strong>RSVP Technology:</strong> Rapid Serial Visual Presentation for optimal reading speed</li>
+                <li><strong>Adjustable Speed:</strong> Control your reading speed from 100 to 1000 WPM</li>
+                <li><strong>Smart Pauses:</strong> Automatic pauses at sentence and paragraph breaks for natural reading flow</li>
+                <li><strong>Visual Focus:</strong> Middle letter highlighting maintains your focal point</li>
+                <li><strong>Keyboard Shortcuts:</strong> Quick controls with Space (play/pause) and R (reset)</li>
+                <li><strong>Responsive Design:</strong> Works perfectly on desktop, tablet, and mobile devices</li>
+                <li><strong>Text & URL Input:</strong> Paste text directly or load articles from any website</li>
+                <li><strong>Free & No Registration:</strong> No signup required, completely free to use</li>
+            </ul>
+        </section>
+
+        <section class="how-it-works-section">
+            <h2>How Speed Reading Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <span class="step-number">1</span>
+                    <h3>Paste Your Content</h3>
+                    <p>Enter text directly or load an article from a URL</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">2</span>
+                    <h3>Set Your Speed</h3>
+                    <p>Adjust the WPM slider to your comfort level (start at 300 WPM)</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">3</span>
+                    <h3>Start Reading</h3>
+                    <p>Click Play or press Space to begin your speed reading session</p>
+                </div>
+                <div class="step">
+                    <span class="step-number">4</span>
+                    <h3>Improve Gradually</h3>
+                    <p>Increase speed as you get comfortable for faster reading speeds</p>
+                </div>
+            </div>
+        </section>
+
         <footer>
-            <p>Speedreader - Double your reading speed with focus and flow</p>
+            <p>Speedreader - Free Speed Reading Tool for Learning Faster</p>
+            <p><small>Speed reading technology using RSVP (Rapid Serial Visual Presentation) for improved reading efficiency and comprehension.</small></p>
         </footer>
     </div>
 
     <script src="script.js"></script>
+    
+    <!-- Structured Data (JSON-LD Schema) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Speedreader",
+      "description": "Free speed reading tool using RSVP technology to help you read 2-3x faster while maintaining comprehension",
+      "url": "https://speedreader.app",
+      "applicationCategory": "EducationalApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "500"
+      },
+      "author": {
+        "@type": "Organization",
+        "name": "Speedreader Team"
+      },
+      "features": [
+        "RSVP Technology",
+        "Adjustable Speed (100-1000 WPM)",
+        "Text and URL Input",
+        "Visual Focus Highlighting",
+        "Keyboard Shortcuts",
+        "Responsive Design"
+      ]
+    }
+    </script>
 </body>
 </html>

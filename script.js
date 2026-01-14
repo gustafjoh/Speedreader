@@ -31,11 +31,11 @@ class SpeedReader {
 How it works:
 • Each word appears one at a time in the same position
 • The middle letter of each word is highlighted in red to keep your eyes focused
-• You control the speed (100-1000 WPM) with the slider
+• You control the speed (100 to 1000 WPM) with the slider
 • Longer pauses appear at sentence breaks and paragraph changes
 
 Why it works:
-Most of our reading time is spent on eye movement. By keeping words in one place and highlighting the focal point, we reduce unnecessary eye movement and can read 2-3 times faster!
+Most of our reading time is spent on eye movement. By keeping words in one place and highlighting the focal point, we reduce unnecessary eye movement and can read 2 to 3 times faster!
 
 Tips for success:
 1. Start at 300 WPM (normal reading speed)
@@ -324,6 +324,7 @@ Ready to try? Paste any text above or load from a URL to begin.`;
     updateProgress() {
         const percentage = (this.currentIndex / this.words.length) * 100;
         this.progressBar.style.width = percentage + '%';
+        this.progressBar.setAttribute('aria-valuenow', Math.round(percentage));
         this.progressText.textContent = `${this.currentIndex + 1} / ${this.words.length}`;
     }
 
