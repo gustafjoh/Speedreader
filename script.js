@@ -336,7 +336,6 @@ Ready to try? Paste any text above or load from a URL to begin.`;
         this.pauseBtn.disabled = false;
 
         const msPerWord = 60000 / this.speed;
-        let nextTimeout;
 
         const playNext = () => {
             this.currentIndex++;
@@ -364,11 +363,10 @@ Ready to try? Paste any text above or load from a URL to begin.`;
                 delayTime = msPerWord * 4; // 4x för nytt stycke
             }
 
-            nextTimeout = setTimeout(playNext, delayTime);
+            this.currentTimeout = setTimeout(playNext, delayTime);
         };
 
-        nextTimeout = setTimeout(playNext, msPerWord);
-        this.currentTimeout = nextTimeout;
+        this.currentTimeout = setTimeout(playNext, msPerWord);
     }
 
     pause() {
