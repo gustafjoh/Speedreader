@@ -14,16 +14,36 @@
         </header>
 
         <div class="input-section">
-            <div class="input-group">
-                <label for="urlInput">Klistra in artikel-URL:</label>
-                <input 
-                    type="url" 
-                    id="urlInput" 
-                    placeholder="https://exempel.com/artikel" 
-                    autocomplete="off"
-                >
-                <button id="loadBtn" class="btn-primary">Ladda artikel</button>
+            <div class="input-tabs">
+                <button class="tab-btn active" data-tab="url-tab">📎 URL</button>
+                <button class="tab-btn" data-tab="text-tab">📝 Direkt text</button>
             </div>
+
+            <div id="url-tab" class="tab-content active">
+                <div class="input-group">
+                    <label for="urlInput">Klistra in artikel-URL:</label>
+                    <input 
+                        type="url" 
+                        id="urlInput" 
+                        placeholder="https://exempel.com/artikel" 
+                        autocomplete="off"
+                    >
+                    <button id="loadBtn" class="btn-primary">Ladda artikel</button>
+                </div>
+            </div>
+
+            <div id="text-tab" class="tab-content">
+                <div class="input-group">
+                    <label for="textInput">Klistra in text direkt:</label>
+                    <textarea 
+                        id="textInput" 
+                        placeholder="Klistra in artikeltext här..." 
+                        rows="8"
+                    ></textarea>
+                    <button id="loadTextBtn" class="btn-primary">Börja läsa</button>
+                </div>
+            </div>
+
             <div id="errorMessage" class="error-message"></div>
         </div>
 

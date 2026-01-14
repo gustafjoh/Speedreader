@@ -7,7 +7,9 @@ class SpeedReader {
         this.interval = null;
 
         this.urlInput = document.getElementById('urlInput');
+        this.textInput = document.getElementById('textInput');
         this.loadBtn = document.getElementById('loadBtn');
+        this.loadTextBtn = document.getElementById('loadTextBtn');
         this.playBtn = document.getElementById('playBtn');
         this.pauseBtn = document.getElementById('pauseBtn');
         this.resetBtn = document.getElementById('resetBtn');
@@ -23,9 +25,25 @@ class SpeedReader {
     }
 
     setupEventListeners() {
+        // Tab switcher
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+                e.target.classList.add('active');
+                document.getElementById(e.target.dataset.tab).classList.add('active');
+                this.errorMessage.textContent = '';
+            });
+        });
+
         this.loadBtn.addEventListener('click', () => this.loadArticle());
         this.urlInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') this.loadArticle();
+        });
+
+        this.loadTextBtn.addEventListener('click', () => this.loadDirectText());
+        this.textInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.ctrlKey) this.loadDirectText();
         });
 
         this.playBtn.addEventListener('click', () => this.play());
@@ -114,6 +132,27 @@ class SpeedReader {
             this.loadBtn.disabled = false;
             this.loadBtn.textContent = 'Ladda artikel';
         }
+    }
+
+    loadDirectText() {
+        const text = this.textInput.value.trim();
+        
+        if (!text) {
+            this.showError('Vänligen klistra in lite text');
+            return;
+        }
+
+        this.words = this.parseWords(text);
+        this.currentIndex = 0;
+        this.isPlaying = false;
+
+        this.readerSection.style.display = 'block';
+        this.displayWord();
+        this.updateProgress();
+        this.errorMessage.textContent = '';
+
+        // Scrolla till läsaren
+        this.readerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
     extractMainText(html) {
