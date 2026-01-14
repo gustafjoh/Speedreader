@@ -5,24 +5,24 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    font-family: 'Georgia', 'Garamond', serif;
+    background: #f5f3f0;
     min-height: 100vh;
     padding: 20px;
-    color: #333;
+    color: #2c2c2c;
 }
 
 .container {
     max-width: 900px;
     margin: 0 auto;
     background: white;
-    border-radius: 15px;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     overflow: hidden;
 }
 
 header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #2c3e50;
     color: white;
     padding: 40px 20px;
     text-align: center;
@@ -63,12 +63,12 @@ header p {
 }
 
 .tab-btn:hover {
-    color: #667eea;
+    color: #34495e;
 }
 
 .tab-btn.active {
-    color: #667eea;
-    border-bottom-color: #667eea;
+    color: #34495e;
+    border-bottom-color: #34495e;
 }
 
 .tab-content {
@@ -105,49 +105,52 @@ label {
 
 input[type="url"] {
     padding: 12px 15px;
-    border: 2px solid #ddd;
+    border: 2px solid #e0ddd8;
     border-radius: 8px;
     font-size: 1em;
     transition: border-color 0.3s;
+    font-family: inherit;
 }
 
 input[type="url"]:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #34495e;
+    box-shadow: 0 0 0 3px rgba(52, 73, 94, 0.1);
 }
 
 textarea {
     padding: 12px 15px;
-    border: 2px solid #ddd;
+    border: 2px solid #e0ddd8;
     border-radius: 8px;
     font-size: 1em;
-    font-family: inherit;
+    font-family: 'Georgia', serif;
+    line-height: 1.6;
     resize: vertical;
     transition: border-color 0.3s;
 }
 
 textarea:focus {
     outline: none;
-    border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    border-color: #34495e;
+    box-shadow: 0 0 0 3px rgba(52, 73, 94, 0.1);
 }
 
 .btn-primary {
     padding: 12px 30px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: #34495e;
     color: white;
     border: none;
     border-radius: 8px;
     font-size: 1em;
     font-weight: 600;
     cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: all 0.2s;
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+    background: #2c3e50;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
 
 .btn-primary:active {
@@ -178,8 +181,8 @@ textarea:focus {
 .btn-control {
     padding: 10px 20px;
     background: white;
-    border: 2px solid #667eea;
-    color: #667eea;
+    border: 2px solid #34495e;
+    color: #34495e;
     border-radius: 8px;
     font-weight: 600;
     cursor: pointer;
@@ -187,7 +190,7 @@ textarea:focus {
 }
 
 .btn-control:hover {
-    background: #667eea;
+    background: #34495e;
     color: white;
 }
 
@@ -219,49 +222,52 @@ input[type="range"]::-webkit-slider-thumb {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: #667eea;
+    background: #34495e;
     cursor: pointer;
     transition: background 0.2s;
 }
 
 input[type="range"]::-webkit-slider-thumb:hover {
-    background: #764ba2;
+    background: #2c3e50;
 }
 
 input[type="range"]::-moz-range-thumb {
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    background: #667eea;
+    background: #34495e;
     cursor: pointer;
     border: none;
     transition: background 0.2s;
 }
 
 input[type="range"]::-moz-range-thumb:hover {
-    background: #764ba2;
+    background: #2c3e50;
 }
 
 #speedDisplay {
     font-weight: 700;
-    color: #667eea;
+    color: #34495e;
     min-width: 45px;
     text-align: right;
 }
 
 .word-display {
-    font-size: 4em;
-    font-weight: 700;
+    font-size: 5.5em;
+    font-weight: 400;
     text-align: center;
-    padding: 60px 40px;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-    border-radius: 12px;
-    min-height: 200px;
+    padding: 80px 40px;
+    background: #fafaf8;
+    border: 1px solid #e0ddd8;
+    border-radius: 8px;
+    min-height: 250px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 30px 0;
-    line-height: 1.2;
+    line-height: 1.1;
+    font-family: 'Georgia', serif;
+    letter-spacing: -0.02em;
 }
 
 .word-display .highlight {
@@ -279,7 +285,7 @@ input[type="range"]::-moz-range-thumb:hover {
 
 .progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    background: #34495e;
     width: 0%;
     transition: width 0.2s;
 }
