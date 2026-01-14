@@ -55,21 +55,50 @@ class SpeedReader {
         this.errorMessage.textContent = '';
 
         try {
-            // Använd en CORS proxy för att hämta innehål
-            const encodedUrl = encodeURIComponent(url);
-            const proxyUrl = `https://api.allorigins.win/get?url=${encodedUrl}`;
-            const response = await fetch(proxyUrl);
+            // Försök med flera proxies
+            const proxies = [
+                url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+                url => `https://textize.herokuapp.com/${encodeURIComponent(url)}`,
+            ];
 
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
+            let html = null;
+
+            for (let proxyFn of proxies) {
+                try {
+                    const proxyUrl = proxyFn(url);
+                    const response = await fetch(proxyUrl, { 
+                        method: 'GET',
+                        headers: { 'Accept': '*/*' }
+                    });
+
+                    if (!response.ok) continue;
+
+                    const contentType = response.headers.get('content-type');
+                    let data;
+                    
+                    if (contentType && contentType.includes('application/json')) {
+                        data = await response.json();
+                        html = data.contents || data.text;
+                    } else {
+                        html = await response.text();
+                    }
+
+                    if (html && html.length > 100) {
+                        break;
+                    }
+                } catch (e) {
+                    continue;
+                }
             }
 
-            const data = await response.json();
-            const html = data.contents;
+            if (!html || html.length === 0) {
+                throw new Error('Kunde inte hämta innehållet från URL:en.');
+            }
+
             const text = this.extractMainText(html);
 
             if (!text || text.length === 0) {
-                throw new Error('Kunde inte extrahera text från URL:en');
+                throw new Error('Kunde inte extrahera text från sidan.');
             }
 
             this.words = this.parseWords(text);
