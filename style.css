@@ -274,6 +274,12 @@ input[type="range"]::-moz-range-thumb:hover {
     color: #d32f2f;
 }
 
+.word-display .punctuation {
+    color: #666;
+    font-weight: 600;
+    margin-left: 0.1em;
+}
+
 .progress {
     width: 100%;
     height: 6px;

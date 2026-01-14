@@ -211,27 +211,53 @@ class SpeedReader {
             const words = paragraph
                 .trim()
                 .split(/\s+/)
-                .filter(word => word.length > 0)
-                .map((word, wordIndex) => ({
-                    text: word.replace(/[^a-zA-Z0-9åäöÅÄÖ]/g, ''),
-                    isNewParagraph: wordIndex === 0 && paraIndex > 0
-                }));
+                .filter(word => word.length > 0);
             
-            wordObjects.push(...words);
+            words.forEach((word, wordIndex) => {
+                // Extrahera skiljetecken från slutet av ordet
+                let cleanWord = word;
+                let punctuation = '';
+                
+                // Behåll skiljetecken i slutet
+                const punctMatch = word.match(/([.!?;:,…]*)\s*$/);
+                if (punctMatch && punctMatch[1]) {
+                    punctuation = punctMatch[1];
+                    cleanWord = word.replace(/[.!?;:,…]*\s*$/, '');
+                }
+                
+                // Rensa ordet från andra specialtecken men behåll bokstäver och siffror
+                cleanWord = cleanWord.replace(/[^a-zA-Z0-9åäöÅÄÖ]/g, '');
+                
+                if (cleanWord.length === 0) return;
+                
+                // Detektera meningsslut
+                const isEndOfSentence = /[.!?…]/.test(punctuation);
+                const isNewParagraph = wordIndex === 0 && paraIndex > 0;
+                
+                wordObjects.push({
+                    text: cleanWord,
+                    punctuation: punctuation,
+                    isEndOfSentence: isEndOfSentence,
+                    isNewParagraph: isNewParagraph
+                });
+            });
         });
         
         return wordObjects;
     }
 
-    highlightMiddleLetter(word) {
-        if (word.length === 0) return word;
+    highlightMiddleLetter(wordObj) {
+        const word = typeof wordObj === 'string' ? wordObj : wordObj.text;
+        const punctuation = typeof wordObj === 'object' ? (wordObj.punctuation || '') : '';
+        
+        if (word.length === 0) return punctuation;
 
         const middle = Math.floor(word.length / 2);
         const before = word.substring(0, middle);
         const letter = word.substring(middle, middle + 1);
         const after = word.substring(middle + 1);
 
-        return `${before}<span class="highlight">${letter}</span>${after}`;
+        return `${before}<span class="highlight">${letter}</span>${after}<span class="punctuation">${punctuation}</span>`;
     }
 
     displayWord() {
@@ -272,19 +298,24 @@ class SpeedReader {
 
             this.displayWord();
 
-            // Kontrollera om nästa ord är början på ett nytt stycke
+            // Beräkna delay baserat på ord-typ
             const nextWord = this.words[this.currentIndex];
-            const isNewParagraph = typeof nextWord === 'object' && nextWord.isNewParagraph;
+            let delayTime = msPerWord;
+
+            // Längre paus efter meningsslut
+            if (nextWord.isEndOfSentence) {
+                delayTime = msPerWord * 2.5; // 2.5x för meningsslut
+            }
             
-            // Paus är normal tid för ord, men dubbel för styckebrytning
-            const delayTime = isNewParagraph ? msPerWord * 3 : msPerWord;
+            // Längsta paus vid styckebrytning
+            if (nextWord.isNewParagraph) {
+                delayTime = msPerWord * 4; // 4x för nytt stycke
+            }
 
             nextTimeout = setTimeout(playNext, delayTime);
         };
 
         nextTimeout = setTimeout(playNext, msPerWord);
-        
-        // Lagra timeout-ID så vi kan rensa det vid pause
         this.currentTimeout = nextTimeout;
     }
 
