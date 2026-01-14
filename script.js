@@ -56,14 +56,16 @@ class SpeedReader {
 
         try {
             // Använd en CORS proxy för att hämta innehål
-            const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-            const response = await fetch(proxyUrl + url);
+            const encodedUrl = encodeURIComponent(url);
+            const proxyUrl = `https://api.allorigins.win/get?url=${encodedUrl}`;
+            const response = await fetch(proxyUrl);
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            const html = await response.text();
+            const data = await response.json();
+            const html = data.contents;
             const text = this.extractMainText(html);
 
             if (!text || text.length === 0) {
