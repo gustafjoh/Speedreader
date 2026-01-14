@@ -21,7 +21,32 @@ class SpeedReader {
         this.readerSection = document.getElementById('readerSection');
         this.errorMessage = document.getElementById('errorMessage');
 
+        this.initializeDefaultText();
         this.setupEventListeners();
+    }
+
+    initializeDefaultText() {
+        const defaultText = `Welcome to Speedreader! This tool uses Rapid Serial Visual Presentation (RSVP) to help you read faster while maintaining comprehension.
+
+How it works:
+• Each word appears one at a time in the same position
+• The middle letter of each word is highlighted in red to keep your eyes focused
+• You control the speed (100-1000 WPM) with the slider
+• Longer pauses appear at sentence breaks and paragraph changes
+
+Why it works:
+Most of our reading time is spent on eye movement. By keeping words in one place and highlighting the focal point, we reduce unnecessary eye movement and can read 2-3 times faster!
+
+Tips for success:
+1. Start at 300 WPM (normal reading speed)
+2. Gradually increase as you get comfortable
+3. Focus on the red letter, not the entire word
+4. Take breaks if needed - reading is a skill!
+
+Ready to try? Paste any text above or load from a URL to begin.`;
+        
+        this.textInput.value = defaultText;
+        this.textInput.scrollTop = 0;
     }
 
     setupEventListeners() {
@@ -58,22 +83,48 @@ class SpeedReader {
                 this.play();
             }
         });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            // Ignore if focus is on input field
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') {
+                return;
+            }
+
+            // Space - Play/Pause
+            if (e.code === 'Space') {
+                e.preventDefault();
+                if (this.words.length === 0) return;
+                if (this.isPlaying) {
+                    this.pause();
+                } else {
+                    this.play();
+                }
+            }
+
+            // R - Reset
+            if (e.key.toLowerCase() === 'r') {
+                e.preventDefault();
+                if (this.words.length === 0) return;
+                this.reset();
+            }
+        });
     }
 
     async loadArticle() {
         const url = this.urlInput.value.trim();
         
         if (!url) {
-            this.showError('Vänligen ange en URL');
+            this.showError('Please enter a URL');
             return;
         }
 
         this.loadBtn.disabled = true;
-        this.loadBtn.textContent = 'Laddar...';
+        this.loadBtn.textContent = 'Loading...';
         this.errorMessage.textContent = '';
 
         try {
-            // Försök med flera proxies
+            // Try multiple proxies
             const proxies = [
                 url => `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`,
                 url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
@@ -119,13 +170,13 @@ class SpeedReader {
             }
 
             if (!html || html.length === 0) {
-                throw new Error('Kunde inte hämta sidan. Testa den direkta text-funktionen istället.');
+                throw new Error('Could not load the page. Try using the text input instead.');
             }
 
             const text = this.extractMainText(html);
 
             if (!text || text.length === 0) {
-                throw new Error('Kunde inte extrahera text från sidan.');
+                throw new Error('Could not extract text from the page.');
             }
 
             this.words = this.parseWords(text);
@@ -137,10 +188,10 @@ class SpeedReader {
             this.updateProgress();
             this.readerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } catch (error) {
-            this.showError('Fel vid laddning: ' + error.message);
+            this.showError('Error loading: ' + error.message);
         } finally {
             this.loadBtn.disabled = false;
-            this.loadBtn.textContent = 'Ladda artikel';
+            this.loadBtn.textContent = 'Load Article';
         }
     }
 
@@ -148,7 +199,7 @@ class SpeedReader {
         const text = this.textInput.value.trim();
         
         if (!text) {
-            this.showError('Vänligen klistra in lite text');
+            this.showError('Please paste some text');
             return;
         }
 
@@ -161,7 +212,7 @@ class SpeedReader {
         this.updateProgress();
         this.errorMessage.textContent = '';
 
-        // Scrolla till läsaren
+        // Scroll to reader
         this.readerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
 
@@ -347,7 +398,7 @@ class SpeedReader {
     }
 }
 
-// Initialisera när DOM är redo
+// Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
     new SpeedReader();
 });

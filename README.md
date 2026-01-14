@@ -1,121 +1,136 @@
-# 📖 Speedreader - Snabbläsare
+# 📖 Speedreader - Speed Reading Tool
 
-En modern webbapplikation för att läsa artiklar och texter snabbt och effektivt med visuell fokusering. Perfekt för att spara tid och förbättra läshastigheten!
+A modern web application for reading articles and texts faster and more efficiently with visual focus. Perfect for saving time and improving your reading speed!
 
-## ✨ Funktioner
+## ✨ Features
 
-- **Två inmatningslägen:**
-  - 📎 Ladda artiklar direkt från URL
-  - 📝 Klistra in text direkt
+- **Two input modes:**
+  - 📝 Paste text directly
+  - 📎 Load articles from URL
   
-- **Intelligent textextraktion** - Extraherar automatiskt huvudinnehållet från webbsidor
+- **Intelligent text extraction** - Automatically extracts main content from web pages
 
-- **Visuell fokusering** - Mittenbokstaven i varje ord visas i rött för att behålla ögonens fokuspunkt
+- **Visual focus** - The middle letter of each word is highlighted in red to keep your eyes focused
 
-- **Justerbar läshastighet** - Välj mellan 100-1000 ord per minut (WPM)
+- **Adjustable reading speed** - Choose between 100-1000 words per minute (WPM)
 
-- **Lättanvändade kontroller:**
-  - ▶ Spela
-  - ⏸ Paus
-  - ⟲ Nollställ
+- **Easy-to-use controls:**
+  - ▶ Play
+  - ⏸ Pause
+  - ⟲ Reset
   
-- **Förloppsindikator** - Se hur långt du har kommit i texten
+- **Progress indicator** - See how far you've come in the text
 
-- **Responsiv design** - Fungerar perfekt på dator, surfplatta och mobil
+- **Responsive design** - Works perfectly on desktop, tablet, and mobile
 
-## 🚀 Kom igång
+- **Keyboard shortcuts:**
+  - **Space** - Play/Pause
+  - **R** - Reset
 
-### Direktstart
-Öppna `index.html` i din webbläsare och börja snabbläsa direkt!
+## 🚀 Getting Started
 
-### Från URL
-1. Gå till fliken "📎 URL"
-2. Klistra in en artikel-URL
-3. Klicka "Ladda artikel"
-4. Justera hastigheten med reglaget
-5. Klicka "▶ Spela" för att börja
+### Quick Start
+Open `index.html` in your web browser and start speed reading immediately!
 
-### Direkt text
-1. Gå till fliken "📝 Direkt text"
-2. Klistra in din text
-3. Klicka "Börja läsa"
-4. Använd kontrollerna för att läsa
+### From Text
+1. Go to the "📝 Paste Text" tab (default)
+2. Replace or paste your text
+3. Click "Start Reading"
+4. Adjust speed with the slider
+5. Click "▶ Play" to begin
 
-## 📱 Systemkrav
+### From URL
+1. Go to the "📎 From URL" tab
+2. Paste an article URL
+3. Click "Load Article"
+4. Adjust speed with the slider
+5. Click "▶ Play" to begin
 
-- Modern webbläsare (Chrome, Firefox, Safari, Edge)
-- Internetanslutning (för att ladda artiklar från URL)
-- JavaScript aktiverat
+## 📱 System Requirements
+
+- Modern web browser (Chrome, Firefox, Safari, Edge)
+- Internet connection (for loading articles from URLs)
+- JavaScript enabled
 
 ## 🎨 Design
 
-- **Modernt gränsnitt** med gradient bakgrund
-- **Stor, tydlig typografi** för optimal läsbarhet
-- **Intuitiva ikoner** för snabb navigering
-- **Smooth animationer** för bättre användarupplevelse
+- **Clean interface** with subtle beige tones
+- **Large, clear typography** for optimal readability
+- **Intuitive icons** for quick navigation
+- **Smooth animations** for better user experience
 
-## ⚙️ Hur det fungerar
+## ⚙️ How It Works
 
-### Snabbläsningsmetoden (RSVP)
-Speedreader använder **Rapid Serial Visual Presentation (RSVP)**-metoden:
-- Visar ett ord åt gången
-- Mittenbokstaven är markerad i rött
-- Ordet förblir på samma position på skärmen
-- Reducerar ögonrörelser och ökar läshastigheten
+### Speed Reading Method (RSVP)
+Speedreader uses **Rapid Serial Visual Presentation (RSVP)** technique:
+- Shows one word at a time
+- Keeps words in the same position on screen
+- Highlights the middle letter in red
+- Automatically adds pauses at sentence and paragraph breaks
+- Reduces unnecessary eye movement and increases reading speed by 2-3x!
 
-### Läshastighet
-Hastigheten mäts i **WPM (Words Per Minute)**:
-- **100-200 WPM** - Långsam, för svårare texter
-- **300 WPM** - Normalläshastighet (standard)
-- **600+ WPM** - Snabbläsning
+### Reading Speed
+Speed is measured in **WPM (Words Per Minute)**:
+- **100-200 WPM** - Slow, for difficult texts
+- **300 WPM** - Normal reading speed (default)
+- **600+ WPM** - Speed reading
 
-## 🔧 Teknologi
+## 🔧 Technology
 
-- **HTML5** - Semantisk struktur
-- **CSS3** - Modern styling och animationer
-- **Vanilla JavaScript** - Ingen beroenden, ren och enkel kod
-- **CORS-proxy** - För att hämta innehål från externa webbsidor
+- **HTML5** - Semantic structure
+- **CSS3** - Modern styling and animations
+- **Vanilla JavaScript** - No dependencies, clean and simple code
+- **CORS proxies** - For fetching content from external websites
 
-## 📝 Projektstruktur
+## 📝 Project Structure
 
 ```
 Speedreader/
-├── index.html      # Huvuddokument
-├── style.css       # Stilar och design
-├── script.js       # JavaScript-logik
-└── README.md       # Denna fil
+├── index.html      # Main document
+├── style.css       # Styles and design
+├── script.js       # JavaScript logic
+└── README.md       # This file
 ```
 
-## 🐛 Felsökning
+## 🐛 Troubleshooting
 
-### "Kunde inte hämta innehållet"
-- Kontrollera att URL:en är korrekt
-- Försök med en annan webbsida
-- Några sajter kan blockera proxy-åtkomst
+### "Could not load the page"
+- Check that the URL is correct
+- Try a different website
+- Some sites may block proxy access
 
-### "Kunde inte extrahera text"
-- Webbsidan kanske inte har textinnehål i standardformat
-- Testa den direkta text-funktionen istället
+### "Could not extract text"
+- The website may not have content in standard format
+- Try using the direct text input instead
 
-## 💡 Tips för bästa resultatet
+## 💡 Tips for Best Results
 
-1. **Börja lågt** - Börja på 200-300 WPM om du är ny på snabbläsning
-2. **Fokus** - Håll ögonen på mittenbokstaven
-3. **Vilka ord** - Du kan pausa när som helst för att reflektera
-4. **Träning** - Läshastigheten ökar med övning
+1. **Start slow** - Begin at 200-300 WPM if you're new to speed reading
+2. **Keep focus** - Keep your eyes on the red letter
+3. **Pause when needed** - You can pause anytime to reflect
+4. **Practice makes perfect** - Reading speed increases with practice
 
-## 📄 Licens
+## 🌍 Why Speed Reading Works
 
-Fritt att använda och modifiera.
+- **Reduced eye movement** - Words stay in one place
+- **Visual anchoring** - Red letter keeps focus point steady
+- **Minimal subvocalization** - Harder to "hear" words in your head at high speeds
+- **Flow state** - Rhythm helps maintain engagement
 
-## 🎯 Framtida förbättringar
+## 📄 License
 
-- [ ] Histori över lästa artiklar
-- [ ] Möjlighet att spara favoriter
-- [ ] Flera färgteman
-- [ ] Offline-läsning
-- [ ] Statistik över läshastighet
+Free to use and modify.
+
+## 🎯 Future Improvements
+
+- [ ] Reading history
+- [ ] Save favorite articles
+- [ ] Multiple color themes
+- [ ] Offline reading
+- [ ] Reading statistics and progress tracking
+- [ ] Text-to-speech integration
+- [ ] Reading comprehension quiz
 
 ---
 
-**Glad snabbläsning!** 📖✨
+**Happy speed reading!** 📖✨

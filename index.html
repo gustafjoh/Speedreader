@@ -1,46 +1,46 @@
 <!DOCTYPE html>
-<html lang="sv">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Speedreader - Snabbläsare</title>
+    <title>Speedreader - Speed Reading Tool</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div class="container">
         <header>
             <h1>📖 Speedreader</h1>
-            <p>Läs artiklar snabbt med visuell fokusering</p>
+            <p>Read articles faster with visual focus</p>
         </header>
 
         <div class="input-section">
             <div class="input-tabs">
-                <button class="tab-btn active" data-tab="url-tab">📎 URL</button>
-                <button class="tab-btn" data-tab="text-tab">📝 Direkt text</button>
+                <button class="tab-btn active" data-tab="text-tab">📝 Paste Text</button>
+                <button class="tab-btn" data-tab="url-tab">📎 From URL</button>
             </div>
 
-            <div id="url-tab" class="tab-content active">
+            <div id="text-tab" class="tab-content active">
                 <div class="input-group">
-                    <label for="urlInput">Klistra in artikel-URL:</label>
-                    <input 
-                        type="url" 
-                        id="urlInput" 
-                        placeholder="https://exempel.com/artikel" 
-                        autocomplete="off"
-                    >
-                    <button id="loadBtn" class="btn-primary">Ladda artikel</button>
+                    <label for="textInput">Paste your text to read:</label>
+                    <textarea 
+                        id="textInput" 
+                        placeholder="Paste article text here to get started..."
+                        rows="8"
+                    ></textarea>
+                    <button id="loadTextBtn" class="btn-primary">Start Reading</button>
                 </div>
             </div>
 
-            <div id="text-tab" class="tab-content">
+            <div id="url-tab" class="tab-content">
                 <div class="input-group">
-                    <label for="textInput">Klistra in text direkt:</label>
-                    <textarea 
-                        id="textInput" 
-                        placeholder="Klistra in artikeltext här..." 
-                        rows="8"
-                    ></textarea>
-                    <button id="loadTextBtn" class="btn-primary">Börja läsa</button>
+                    <label for="urlInput">Paste article URL:</label>
+                    <input 
+                        type="url" 
+                        id="urlInput" 
+                        placeholder="https://example.com/article" 
+                        autocomplete="off"
+                    >
+                    <button id="loadBtn" class="btn-primary">Load Article</button>
                 </div>
             </div>
 
@@ -49,12 +49,12 @@
 
         <div class="reader-section" id="readerSection" style="display: none;">
             <div class="controls">
-                <button id="playBtn" class="btn-control">▶ Spela</button>
-                <button id="pauseBtn" class="btn-control">⏸ Paus</button>
-                <button id="resetBtn" class="btn-control">⟲ Nollställ</button>
+                <button id="playBtn" class="btn-control">▶ Play</button>
+                <button id="pauseBtn" class="btn-control">⏸ Pause</button>
+                <button id="resetBtn" class="btn-control">⟲ Reset</button>
                 
                 <div class="speed-control">
-                    <label for="speedSlider">Hastighet (WPM):</label>
+                    <label for="speedSlider">Speed (WPM):</label>
                     <input 
                         type="range" 
                         id="speedSlider" 
@@ -67,8 +67,13 @@
                 </div>
             </div>
 
+            <div class="keyboard-shortcuts">
+                <span class="shortcut"><kbd>Space</kbd> Play/Pause</span>
+                <span class="shortcut"><kbd>R</kbd> Reset</span>
+            </div>
+
             <div class="word-display" id="wordDisplay">
-                Laddar ord...
+                Loading words...
             </div>
 
             <div class="progress">
@@ -80,7 +85,7 @@
         </div>
 
         <footer>
-            <p>Speedreader - Enkelt sätt att läsa snabbt och effektivt</p>
+            <p>Speedreader - Double your reading speed with focus and flow</p>
         </footer>
     </div>
 
