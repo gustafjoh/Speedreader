@@ -1,4 +1,4 @@
-class SpeedReader {
+class ReadFast {
     constructor() {
         this.words = [];
         this.currentIndex = 0;
@@ -26,7 +26,7 @@ class SpeedReader {
     }
 
     initializeDefaultText() {
-        const defaultText = `Welcome to Speedreader! This tool uses Rapid Serial Visual Presentation (RSVP) to help you read faster while maintaining comprehension.
+        const defaultText = `Welcome to ReadFast! This tool uses Rapid Serial Visual Presentation (RSVP) to help you read faster while maintaining comprehension.
 
 How it works:
 • Each word appears one at a time in the same position
@@ -401,5 +401,5 @@ Ready to try? Paste any text above or load from a URL to begin.`;
 
 // Initialize when DOM is ready
 document.addEventListener('DOMContentLoaded', () => {
-    new SpeedReader();
+    new ReadFast();
 });

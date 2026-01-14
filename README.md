@@ -1,4 +1,4 @@
-# 📖 Speedreader - Speed Reading Tool
+# 📖 ReadFast - Speed Reading Tool
 
 A modern web application for reading articles and texts faster and more efficiently with visual focus. Perfect for saving time and improving your reading speed!
 
@@ -62,7 +62,7 @@ Open `index.html` in your web browser and start speed reading immediately!
 ## ⚙️ How It Works
 
 ### Speed Reading Method (RSVP)
-Speedreader uses **Rapid Serial Visual Presentation (RSVP)** technique:
+ReadFast uses **Rapid Serial Visual Presentation (RSVP)** technique:
 - Shows one word at a time
 - Keeps words in the same position on screen
 - Highlights the middle letter in red
@@ -85,7 +85,7 @@ Speed is measured in **WPM (Words Per Minute)**:
 ## 📝 Project Structure
 
 ```
-Speedreader/
+ReadFast/
 ├── index.html      # Main document
 ├── style.css       # Styles and design
 ├── script.js       # JavaScript logic

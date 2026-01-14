@@ -460,6 +460,19 @@ footer {
     line-height: 1.6;
 }
 
+/* Ad Spaces (Invisible placeholder - ready for monetization) */
+.ad-placeholder {
+    min-height: 250px;
+    margin: 30px 0;
+    background: #fafaf8;
+    border: 1px dashed #e0e0e0;
+    display: none;
+}
+
+.ad-placeholder.active {
+    display: block;
+}
+
 @media (max-width: 600px) {
     header h1 {
         font-size: 2em;
