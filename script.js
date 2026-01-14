@@ -75,42 +75,51 @@ class SpeedReader {
         try {
             // Försök med flera proxies
             const proxies = [
-                url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
-                url => `https://textize.herokuapp.com/${encodeURIComponent(url)}`,
+                url => `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}`,
+                url => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+                url => `https://crossorigin.me/${url}`,
             ];
 
             let html = null;
+            let lastError = null;
 
             for (let proxyFn of proxies) {
                 try {
                     const proxyUrl = proxyFn(url);
                     const response = await fetch(proxyUrl, { 
                         method: 'GET',
-                        headers: { 'Accept': '*/*' }
+                        headers: { 
+                            'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+                            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)'
+                        }
                     });
 
-                    if (!response.ok) continue;
+                    if (!response.ok) {
+                        lastError = `HTTP ${response.status}`;
+                        continue;
+                    }
 
                     const contentType = response.headers.get('content-type');
                     let data;
                     
                     if (contentType && contentType.includes('application/json')) {
                         data = await response.json();
-                        html = data.contents || data.text;
+                        html = data.contents || data.text || data.data;
                     } else {
                         html = await response.text();
                     }
 
-                    if (html && html.length > 100) {
+                    if (html && html.length > 500) {
                         break;
                     }
                 } catch (e) {
+                    lastError = e.message;
                     continue;
                 }
             }
 
             if (!html || html.length === 0) {
-                throw new Error('Kunde inte hämta innehållet från URL:en.');
+                throw new Error('Kunde inte hämta sidan. Testa den direkta text-funktionen istället.');
             }
 
             const text = this.extractMainText(html);
@@ -126,6 +135,7 @@ class SpeedReader {
             this.readerSection.style.display = 'block';
             this.displayWord();
             this.updateProgress();
+            this.readerSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
         } catch (error) {
             this.showError('Fel vid laddning: ' + error.message);
         } finally {
